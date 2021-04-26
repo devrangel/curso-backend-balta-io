@@ -16,7 +16,7 @@ namespace Shop.Controllers
         [Route("")]
         public async Task<ActionResult<List<Product>>> Get([FromServices]DataContext context)
         {
-            List<Product> products = await context.Products.Include(x => x.Category).AsNoTracking().ToListAsync();
+            List<Product> products = await context.Product.Include(x => x.Category).AsNoTracking().ToListAsync();
 
             return Ok(products);
         }
@@ -27,7 +27,7 @@ namespace Shop.Controllers
             int id,
             [FromServices] DataContext context)
         {
-            Product product = await context.Products.Include(x => x.Category).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            Product product = await context.Product.Include(x => x.Category).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
             if (product == null)
             {
@@ -44,7 +44,7 @@ namespace Shop.Controllers
             [FromServices] DataContext context)
         {
             List<Product> products = await context
-                .Products
+                .Product
                 .Include(x => x.Category)
                 .AsNoTracking()
                 .Where(x => x.CategoryId == id)
@@ -71,7 +71,7 @@ namespace Shop.Controllers
 
             try
             {
-                context.Products.Add(model);
+                context.Product.Add(model);
                 await context.SaveChangesAsync();
 
                 return Ok(model);

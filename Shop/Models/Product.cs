@@ -24,5 +24,19 @@ namespace Shop.Models
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
+
+        public Product()
+        {
+
+        }
+
+        public Product(string title, string description, decimal price, int categoryId, Category category)
+        {
+            this.Title = title;
+            this.Description = description;
+            this.Price = price;
+            this.CategoryId = categoryId;
+            this.Category = category;
+        }
     }
 }
