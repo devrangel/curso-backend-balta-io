@@ -27,8 +27,9 @@ namespace Shop
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Shop", Version = "v1" });
             });
 
+            //services.AddDbContext<DataContext>(options => options.UseInMemoryDatabase("Database"));
             services.AddDbContext<DataContext>(options => 
-                    options.UseInMemoryDatabase("Database"));
+                    options.UseSqlServer(Configuration.GetConnectionString("ShopContext")));
 
             services.AddScoped<DataContext, DataContext>();
         }
