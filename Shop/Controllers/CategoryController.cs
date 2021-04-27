@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace Shop.Controllers
 {
-    [Route("categories")]
+    [Route("v1/categories")]
     public class CategoryController : ControllerBase
     {
         [HttpGet]
         [Route("")]
         [AllowAnonymous]
+        [ResponseCache(VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any, Duration = 30)]
+        // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext context)
         {
             List<Category> categories = await context.Category.AsNoTracking().ToListAsync();
