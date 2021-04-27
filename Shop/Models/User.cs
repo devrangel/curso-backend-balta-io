@@ -18,5 +18,17 @@ namespace Shop.Models
         public string Password { get; set; }
 
         public string Role { get; set; }
+
+        public User()
+        {
+
+        }
+
+        public User(string username, string password, string role)
+        {
+            this.Username = username;
+            this.Password = password;
+            this.Role = role;
+        }
     }
 }

@@ -43,6 +43,19 @@ namespace Shop.Services
                 _context.AddRange(pod1, pod2, pod3, pod4);
                 _context.SaveChanges();
             }
+
+            if(_context.User.Any())
+            {
+                return;
+            }
+            else
+            {
+                User employee = new User("pedro", "12345", "employee");
+                User manager = new User("admin", "12345", "manager");
+
+                _context.AddRange(employee, manager);
+                _context.SaveChanges();
+            }
         }
     }
 }
