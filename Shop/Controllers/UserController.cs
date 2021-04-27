@@ -41,8 +41,16 @@ namespace Shop.Controllers
 
             try
             {
+                // Forca o usuario a sempre ser "funcionario"
+                model.Role = "employee";
+
                 context.User.Add(model);
                 await context.SaveChangesAsync();
+
+                // Esconde a senha do Response Body
+                model.Password = "";
+
+
                 return Ok(model);
             }
             catch(Exception)
@@ -100,10 +108,12 @@ namespace Shop.Controllers
 
             var token = TokenService.GenerateToken(user);
 
+            // Esconde a senha
+            user.Password = "";
+
             return new
             {
-                userId = user.Id,
-                userName = user.Username,
+                user = user,
                 token = token
             };
         }
